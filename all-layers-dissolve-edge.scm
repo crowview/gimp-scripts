@@ -13,14 +13,6 @@
     SF-ADJUSTMENT   "Size" '(20 0 100 1 10 1 0)
 ) 
 
-;; 1. Create a loop through all layers except last
-;; 2. On each layer,
-;;  2.25 Check if it's linked
-;;  2.5 Get the dimensions of the layer
-;;  3. Create a layer mask
-;;  4. Blend the specified side using specified percentage
-;;  5. Apply the mask
-;; 6. Pop context
 
 (define (script-fu-all-layers-dissolve-edge img drawable edge size)
     (let ((x-one (cond ((= edge 3) 1) 
