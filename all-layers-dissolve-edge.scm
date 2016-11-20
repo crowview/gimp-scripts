@@ -13,6 +13,12 @@
  SF-ADJUSTMENT   "Size" '(20 0 100 1 10 1 0)
  ) 
 
+;; TODO add linked only option
+
+;; NTS: you can't re-use a single mask on multiple layers because
+;; 1. You can't add a mask to more than one layer.
+;; 2. Once you remove a mask from a layer, it's deleted.
+;; However, you can create a mask using one layer and add it to another layer.
 
 (define (script-fu-all-layers-dissolve-edge img drawable edge size)
   (let ((x-one (cond ((= edge 3) 1) 
@@ -31,7 +37,7 @@
             ('otherwise
              (gimp-layer-add-mask (car layers)
                                   (car (gimp-layer-create-mask (car layers) 0)))
-             (gimp-edit-blend (car (gimp-layer-get-mask (car layers))) ; might be able to re-use mask, assuming all layers are same dimensions
+             (gimp-edit-blend (car (gimp-layer-get-mask (car layers))) 
                               0 0 0 100 0 0 0 0 1 0 1  ; see documentation
                               (* x-one (car (gimp-drawable-width (car layers))))   ; x1
                               (* y-one (car (gimp-drawable-height (car layers))))  ; y1
